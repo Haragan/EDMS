@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="CLIENT_DOCUMENT" EntityType="Хранилище Model.CLIENT_DOCUMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DOCUMENT" EntityType="Хранилище Model.DOCUMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MODERATOR_DOCUMENT" EntityType="Хранилище Model.MODERATOR_DOCUMENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ORGANIZATION" EntityType="Хранилище Model.ORGANIZATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USER" EntityType="Хранилище Model.USER" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CLIENT_DOCUMENT_DOCUMENT" Association="Хранилище Model.FK_CLIENT_DOCUMENT_DOCUMENT">
+            <End Role="DOCUMENT" EntitySet="DOCUMENT" />
+            <End Role="CLIENT_DOCUMENT" EntitySet="CLIENT_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENT_DOCUMENT_USER" Association="Хранилище Model.FK_CLIENT_DOCUMENT_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="CLIENT_DOCUMENT" EntitySet="CLIENT_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODERATOR_DOCUMENT_DOCUMENT" Association="Хранилище Model.FK_MODERATOR_DOCUMENT_DOCUMENT">
+            <End Role="DOCUMENT" EntitySet="DOCUMENT" />
+            <End Role="MODERATOR_DOCUMENT" EntitySet="MODERATOR_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODERATOR_DOCUMENT_USER" Association="Хранилище Model.FK_MODERATOR_DOCUMENT_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="MODERATOR_DOCUMENT" EntitySet="MODERATOR_DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ORGANIZATION" Association="Хранилище Model.FK_USER_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CLIENT_DOCUMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENT_ID" Type="bigint" Nullable="false" />
+          <Property Name="DOCUMENT_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NUMBER" Type="bigint" Nullable="false" />
+          <Property Name="NAME" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="STATUS" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="CREATE_DATE" Type="date" Nullable="false" />
+          <Property Name="CONCLUSION_DATE" Type="date" Nullable="false" />
+          <Property Name="ORGANIZATION_ID" Type="bigint" Nullable="false" />
+          <Property Name="CREATOR_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODERATOR_DOCUMENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MODERATOR_ID" Type="bigint" Nullable="false" />
+          <Property Name="DOCUMENT_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORGANIZATION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="LEGAL_ADRESS" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="POSTCODE" Type="int" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PHONE_NUMBER" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ORGANIZATION_ID" Type="bigint" Nullable="false" />
+          <Property Name="PROFILE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLIENT_DOCUMENT_DOCUMENT">
+          <End Role="DOCUMENT" Type="Хранилище Model.DOCUMENT" Multiplicity="1" />
+          <End Role="CLIENT_DOCUMENT" Type="Хранилище Model.CLIENT_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENT_DOCUMENT">
+              <PropertyRef Name="DOCUMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENT_DOCUMENT_USER">
+          <End Role="USER" Type="Хранилище Model.USER" Multiplicity="1" />
+          <End Role="CLIENT_DOCUMENT" Type="Хранилище Model.CLIENT_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENT_DOCUMENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODERATOR_DOCUMENT_DOCUMENT">
+          <End Role="DOCUMENT" Type="Хранилище Model.DOCUMENT" Multiplicity="1" />
+          <End Role="MODERATOR_DOCUMENT" Type="Хранилище Model.MODERATOR_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MODERATOR_DOCUMENT">
+              <PropertyRef Name="DOCUMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODERATOR_DOCUMENT_USER">
+          <End Role="USER" Type="Хранилище Model.USER" Multiplicity="1" />
+          <End Role="MODERATOR_DOCUMENT" Type="Хранилище Model.MODERATOR_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MODERATOR_DOCUMENT">
+              <PropertyRef Name="MODERATOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ORGANIZATION">
+          <End Role="ORGANIZATION" Type="Хранилище Model.ORGANIZATION" Multiplicity="1" />
+          <End Role="USER" Type="Хранилище Model.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="ORGANIZATION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="emds_dbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientDocuments" EntityType="Model.ClientDocument" />
+          <EntitySet Name="Documents" EntityType="Model.Document" />
+          <EntitySet Name="Organizations" EntityType="Model.Organization" />
+          <EntitySet Name="UsersData" EntityType="Model.UserData" />
+          <AssociationSet Name="FK_CLIENT_DOCUMENT_DOCUMENT" Association="Model.FK_CLIENT_DOCUMENT_DOCUMENT">
+            <End Role="DOCUMENT" EntitySet="Documents" />
+            <End Role="CLIENT_DOCUMENT" EntitySet="ClientDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENT_DOCUMENT_USER" Association="Model.FK_CLIENT_DOCUMENT_USER">
+            <End Role="USER" EntitySet="UsersData" />
+            <End Role="CLIENT_DOCUMENT" EntitySet="ClientDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ORGANIZATION" Association="Model.FK_USER_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="Organizations" />
+            <End Role="USER" EntitySet="UsersData" />
+          </AssociationSet>
+          <EntitySet Name="ModeratorDocuments" EntityType="Model.ModeratorDocument" />
+          <AssociationSet Name="FK_MODERATOR_DOCUMENT_DOCUMENT" Association="Model.FK_MODERATOR_DOCUMENT_DOCUMENT">
+            <End Role="DOCUMENT" EntitySet="Documents" />
+            <End Role="MODERATOR_DOCUMENT" EntitySet="ModeratorDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODERATOR_DOCUMENT_USER" Association="Model.FK_MODERATOR_DOCUMENT_USER">
+            <End Role="USER" EntitySet="UsersData" />
+            <End Role="MODERATOR_DOCUMENT" EntitySet="ModeratorDocuments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClientDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="DocumentID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Docuent" Relationship="Model.FK_CLIENT_DOCUMENT_DOCUMENT" FromRole="CLIENT_DOCUMENT" ToRole="DOCUMENT" />
+          <NavigationProperty Name="Client" Relationship="Model.FK_CLIENT_DOCUMENT_USER" FromRole="CLIENT_DOCUMENT" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConclusionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrganizationID" Type="Int64" Nullable="false" />
+          <Property Name="CreatorID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Model.FK_CLIENT_DOCUMENT_DOCUMENT" FromRole="DOCUMENT" ToRole="CLIENT_DOCUMENT" />
+          <NavigationProperty Name="Moderators" Relationship="Model.FK_MODERATOR_DOCUMENT_DOCUMENT" FromRole="DOCUMENT" ToRole="MODERATOR_DOCUMENT" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="LegalAdress" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Postcode" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_USER_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="OrganizationID" Type="Int64" Nullable="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClientDocuments" Relationship="Model.FK_CLIENT_DOCUMENT_USER" FromRole="USER" ToRole="CLIENT_DOCUMENT" />
+          <NavigationProperty Name="Organization" Relationship="Model.FK_USER_ORGANIZATION" FromRole="USER" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="ModeratorDocuments" Relationship="Model.FK_MODERATOR_DOCUMENT_USER" FromRole="USER" ToRole="MODERATOR_DOCUMENT" />
+        </EntityType>
+        <Association Name="FK_CLIENT_DOCUMENT_DOCUMENT">
+          <End Role="DOCUMENT" Type="Model.Document" Multiplicity="1" />
+          <End Role="CLIENT_DOCUMENT" Type="Model.ClientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENT_DOCUMENT">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENT_DOCUMENT_USER">
+          <End Role="USER" Type="Model.UserData" Multiplicity="1" />
+          <End Role="CLIENT_DOCUMENT" Type="Model.ClientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENT_DOCUMENT">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ORGANIZATION">
+          <End Role="ORGANIZATION" Type="Model.Organization" Multiplicity="1" />
+          <End Role="USER" Type="Model.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="OrganizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModeratorDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="ModeratorID" Nullable="false" />
+          <Property Type="Int64" Name="DocumentID" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Model.FK_MODERATOR_DOCUMENT_DOCUMENT" FromRole="MODERATOR_DOCUMENT" ToRole="DOCUMENT" />
+          <NavigationProperty Name="Moderator" Relationship="Model.FK_MODERATOR_DOCUMENT_USER" FromRole="MODERATOR_DOCUMENT" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_MODERATOR_DOCUMENT_DOCUMENT">
+          <End Type="Model.Document" Role="DOCUMENT" Multiplicity="1" />
+          <End Type="Model.ModeratorDocument" Role="MODERATOR_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOCUMENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MODERATOR_DOCUMENT">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODERATOR_DOCUMENT_USER">
+          <End Type="Model.UserData" Role="USER" Multiplicity="1" />
+          <End Type="Model.ModeratorDocument" Role="MODERATOR_DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MODERATOR_DOCUMENT">
+              <PropertyRef Name="ModeratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="emds_dbEntities">
+          <EntitySetMapping Name="ClientDocuments">
+            <EntityTypeMapping TypeName="Model.ClientDocument">
+              <MappingFragment StoreEntitySet="CLIENT_DOCUMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="CLIENT_ID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DOCUMENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="Model.Document">
+              <MappingFragment StoreEntitySet="DOCUMENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="NUMBER" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Status" ColumnName="STATUS" />
+                <ScalarProperty Name="CreateDate" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="ConclusionDate" ColumnName="CONCLUSION_DATE" />
+                <ScalarProperty Name="OrganizationID" ColumnName="ORGANIZATION_ID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CREATOR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="Model.Organization">
+              <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="LegalAdress" ColumnName="LEGAL_ADRESS" />
+                <ScalarProperty Name="Postcode" ColumnName="POSTCODE" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PHONE_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersData">
+            <EntityTypeMapping TypeName="Model.UserData">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Email" ColumnName="EMAIL" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="OrganizationID" ColumnName="ORGANIZATION_ID" />
+                <ScalarProperty Name="ProfileID" ColumnName="PROFILE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeratorDocuments">
+            <EntityTypeMapping TypeName="Model.ModeratorDocument">
+              <MappingFragment StoreEntitySet="MODERATOR_DOCUMENT">
+                <ScalarProperty Name="DocumentID" ColumnName="DOCUMENT_ID" />
+                <ScalarProperty Name="ModeratorID" ColumnName="MODERATOR_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
