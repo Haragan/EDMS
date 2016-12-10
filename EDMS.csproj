@@ -184,12 +184,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientDocumentController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DocumentSatus.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\ClientDocument.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -222,8 +224,11 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DocumentUtils.cs" />
+    <Compile Include="Utils\UsersUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\workflow.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -353,6 +358,13 @@
     <Content Include="Views\Organization\Create.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Organization\Delete.cshtml" />
+    <Content Include="Views\ClientDocument\Index.cshtml" />
+    <Content Include="Views\ClientDocument\Details.cshtml" />
+    <Content Include="Views\ClientDocument\Create.cshtml" />
+    <Content Include="Views\ClientDocument\Edit.cshtml" />
+    <Content Include="Views\ClientDocument\Delete.cshtml" />
+    <Content Include="Views\ClientDocument\ActionDeny.cshtml" />
+    <Content Include="Views\ClientDocument\Workflow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

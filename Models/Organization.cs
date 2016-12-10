@@ -7,25 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDMS.Models
-{
+namespace EDMS.Models {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Organization
-    {
-        public Organization()
-        {
+
+    public partial class Organization {
+        public Organization() {
             this.Users = new HashSet<UserData>();
             this.Documents = new HashSet<Document>();
         }
-    
+
         public long ID { get; set; }
         public string Name { get; set; }
         public string LegalAdress { get; set; }
         public int Postcode { get; set; }
         public string PhoneNumber { get; set; }
-    
+
         public virtual ICollection<UserData> Users { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
     }

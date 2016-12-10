@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace EDMS.Models {
     public class UsersContext : DbContext {
-        public UsersContext() : base("db") { }
+        public UsersContext() : base("name=db") { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }

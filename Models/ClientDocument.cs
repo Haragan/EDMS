@@ -7,17 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDMS.Models
-{
+namespace EDMS.Models {
     using System;
     using System.Collections.Generic;
-    
-    public partial class ClientDocument
-    {
+
+    public partial class ClientDocument {
         public long ID { get; set; }
         public long ClientID { get; set; }
         public long DocumentID { get; set; }
-    
+
         public virtual Document Docuent { get; set; }
         public virtual UserData Client { get; set; }
     }

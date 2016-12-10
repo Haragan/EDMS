@@ -7,17 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDMS.Models
-{
+namespace EDMS.Models {
     using System;
     using System.Collections.Generic;
-    
-    public partial class ModeratorDocument
-    {
+
+    public partial class ModeratorDocument {
         public long ID { get; set; }
         public long ModeratorID { get; set; }
         public long DocumentID { get; set; }
-    
+
         public virtual Document Document { get; set; }
         public virtual UserData Moderator { get; set; }
     }
