@@ -15,6 +15,22 @@
         <legend>Форма регистрации</legend>
         <ol>
             <li>
+                @Html.LabelFor(m => m.FIO)
+                @Html.TextBoxFor(m => m.FIO)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.OrganizationID)
+                @Html.DropDownListFor(m => m.OrganizationID, (SelectList)ViewBag.orgList)
+            </li>
+            <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
             </li>
@@ -27,7 +43,7 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Зарегестрироваться" />
+        <input type="submit" value="Зарегестрироваться"/>
     </fieldset>
 }
 

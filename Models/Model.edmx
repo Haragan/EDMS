@@ -19,6 +19,14 @@
             <End Role="USER" EntitySet="USER" />
             <End Role="CLIENT_DOCUMENT" EntitySet="CLIENT_DOCUMENT" />
           </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_ORGANIZATION" Association="Хранилище Model.FK_DOCUMENT_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DOCUMENT" EntitySet="DOCUMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_USER" Association="Хранилище Model.FK_DOCUMENT_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="DOCUMENT" EntitySet="DOCUMENT" />
+          </AssociationSet>
           <AssociationSet Name="FK_MODERATOR_DOCUMENT_DOCUMENT" Association="Хранилище Model.FK_MODERATOR_DOCUMENT_DOCUMENT">
             <End Role="DOCUMENT" EntitySet="DOCUMENT" />
             <End Role="MODERATOR_DOCUMENT" EntitySet="MODERATOR_DOCUMENT" />
@@ -49,7 +57,7 @@
           <Property Name="NAME" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="STATUS" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="CREATE_DATE" Type="date" Nullable="false" />
-          <Property Name="CONCLUSION_DATE" Type="date" Nullable="false" />
+          <Property Name="CONCLUSION_DATE" Type="date" />
           <Property Name="ORGANIZATION_ID" Type="bigint" Nullable="false" />
           <Property Name="CREATOR_ID" Type="bigint" Nullable="false" />
         </EntityType>
@@ -103,6 +111,30 @@
             </Principal>
             <Dependent Role="CLIENT_DOCUMENT">
               <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_ORGANIZATION">
+          <End Role="ORGANIZATION" Type="Хранилище Model.ORGANIZATION" Multiplicity="1" />
+          <End Role="DOCUMENT" Type="Хранилище Model.DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOCUMENT">
+              <PropertyRef Name="ORGANIZATION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_USER">
+          <End Role="USER" Type="Хранилище Model.USER" Multiplicity="1" />
+          <End Role="DOCUMENT" Type="Хранилище Model.DOCUMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DOCUMENT">
+              <PropertyRef Name="CREATOR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -172,6 +204,14 @@
             <End Role="USER" EntitySet="UsersData" />
             <End Role="MODERATOR_DOCUMENT" EntitySet="ModeratorDocuments" />
           </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_USER" Association="Model.FK_DOCUMENT_USER">
+            <End Role="UserData" EntitySet="UsersData" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_ORGANIZATION" Association="Model.FK_DOCUMENT_ORGANIZATION">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ClientDocument">
           <Key>
@@ -192,11 +232,13 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ConclusionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConclusionDate" Type="DateTime" Precision="0" />
           <Property Name="OrganizationID" Type="Int64" Nullable="false" />
           <Property Name="CreatorID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="Model.FK_CLIENT_DOCUMENT_DOCUMENT" FromRole="DOCUMENT" ToRole="CLIENT_DOCUMENT" />
           <NavigationProperty Name="Moderators" Relationship="Model.FK_MODERATOR_DOCUMENT_DOCUMENT" FromRole="DOCUMENT" ToRole="MODERATOR_DOCUMENT" />
+          <NavigationProperty Name="Creator" Relationship="Model.FK_DOCUMENT_USER" FromRole="Document" ToRole="UserData" />
+          <NavigationProperty Name="Organization" Relationship="Model.FK_DOCUMENT_ORGANIZATION" FromRole="Document" ToRole="Organization" />
         </EntityType>
         <EntityType Name="Organization">
           <Key>
@@ -208,6 +250,7 @@
           <Property Name="Postcode" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Users" Relationship="Model.FK_USER_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER" />
+          <NavigationProperty Name="Documents" Relationship="Model.FK_DOCUMENT_ORGANIZATION" FromRole="Organization" ToRole="Document" />
         </EntityType>
         <EntityType Name="UserData">
           <Key>
@@ -222,6 +265,7 @@
           <NavigationProperty Name="ClientDocuments" Relationship="Model.FK_CLIENT_DOCUMENT_USER" FromRole="USER" ToRole="CLIENT_DOCUMENT" />
           <NavigationProperty Name="Organization" Relationship="Model.FK_USER_ORGANIZATION" FromRole="USER" ToRole="ORGANIZATION" />
           <NavigationProperty Name="ModeratorDocuments" Relationship="Model.FK_MODERATOR_DOCUMENT_USER" FromRole="USER" ToRole="MODERATOR_DOCUMENT" />
+          <NavigationProperty Name="Documents" Relationship="Model.FK_DOCUMENT_USER" FromRole="UserData" ToRole="Document" />
         </EntityType>
         <Association Name="FK_CLIENT_DOCUMENT_DOCUMENT">
           <End Role="DOCUMENT" Type="Model.Document" Multiplicity="1" />
@@ -290,6 +334,30 @@
             </Principal>
             <Dependent Role="MODERATOR_DOCUMENT">
               <PropertyRef Name="ModeratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_USER">
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="Model.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="CreatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_ORGANIZATION">
+          <End Type="Model.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="Model.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="OrganizationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

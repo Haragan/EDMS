@@ -7,40 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDMS.Models {
+namespace EDMS.Models
+{
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserData {
-        public UserData() {
+    
+    public partial class UserData
+    {
+        public UserData()
+        {
             this.ClientDocuments = new HashSet<ClientDocument>();
             this.ModeratorDocuments = new HashSet<ModeratorDocument>();
+            this.Documents = new HashSet<Document>();
         }
-
-        [Key]
+    
         public long ID { get; set; }
-        
-        [Required]
-        [Display(Name="ФИО")]
         public string FIO { get; set; }
-
-        [Required]
-        [Display(Name="Адрес электронной почты")]
         public string Email { get; set; }
-
-        [Required]
-        [Display(Name="Телефонный номер")]
         public string PhoneNumber { get; set; }
-
-
         public long OrganizationID { get; set; }
-
-
         public int ProfileID { get; set; }
-
+    
         public virtual ICollection<ClientDocument> ClientDocuments { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual ICollection<ModeratorDocument> ModeratorDocuments { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

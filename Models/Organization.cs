@@ -7,35 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EDMS.Models {
+namespace EDMS.Models
+{
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Organization {
-        public Organization() {
+    
+    public partial class Organization
+    {
+        public Organization()
+        {
             this.Users = new HashSet<UserData>();
+            this.Documents = new HashSet<Document>();
         }
-
-        [Key]
+    
         public long ID { get; set; }
-
-        [Required]
-        [Display(Name = "Название огранизации")]
         public string Name { get; set; }
-
-        [Required]
-        [Display(Name = "Юридический адрес")]
         public string LegalAdress { get; set; }
-
-        [Required]
-        [Display(Name = "Почтовый индекс")]
         public int Postcode { get; set; }
-
-        [Required]
-        [Display(Name="Номер телефона")]
         public string PhoneNumber { get; set; }
-
+    
         public virtual ICollection<UserData> Users { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

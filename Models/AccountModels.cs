@@ -8,9 +8,7 @@ using System.Web.Security;
 
 namespace EDMS.Models {
     public class UsersContext : DbContext {
-        public UsersContext()
-            : base("DefaultConnection") {
-        }
+        public UsersContext() : base("db") { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
@@ -65,7 +63,23 @@ namespace EDMS.Models {
 
     public class RegisterModel {
         [Required]
-        [Display(Name = "Имя пользователя")]
+        [Display(Name = "ФИО")]
+        public string FIO { get; set; }
+
+        [Required]
+        [Display(Name = "Адрес электронной почты")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Номер телефона")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Организация, которую Вы представляете")]
+        public int OrganizationID { get; set; }
+
+        [Required]
+        [Display(Name = "Логин")]
         public string UserName { get; set; }
 
         [Required]

@@ -15,6 +15,8 @@ namespace EDMS.Controllers {
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller {
+        emds_dbEntities db = new emds_dbEntities();
+        UsersContext usersDb = new UsersContext();
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
@@ -44,6 +46,7 @@ namespace EDMS.Controllers {
 
         [AllowAnonymous]
         public ActionResult Register() {
+            ViewBag.orgList = new SelectList(db.Organizations.AsEnumerable(), "ID", "NAME", 1);
             return View();
         }
 
@@ -55,6 +58,16 @@ namespace EDMS.Controllers {
                 try {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    UserData userData = new UserData();
+                    userData.ProfileID = WebSecurity.GetUserId(model.UserName);
+                    userData.FIO = model.FIO;
+                    userData.Email = model.Email;
+                    userData.PhoneNumber = model.PhoneNumber;
+                    userData.OrganizationID = model.OrganizationID;
+                    db.UsersData.Add(userData);
+                    db.SaveChanges();
+
                     Roles.AddUserToRole(model.UserName, UserRole.CLIENT.Code);
                     return RedirectToAction("Index", "Organization");
                 } catch (MembershipCreateUserException e) {
