@@ -190,9 +190,9 @@ namespace EDMS.Controllers {
 
             if (ModelState.IsValid) {
                 using (UsersContext db = new UsersContext()) {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.LOGIN.ToLower() == model.UserName.ToLower());
                     if (user == null) {
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new UserProfile { LOGIN = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

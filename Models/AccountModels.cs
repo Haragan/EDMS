@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace EDMS.Models {
     public class UsersContext : DbContext {
-        public UsersContext() : base("name=db") { }
+        public UsersContext() : base("db") { }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
@@ -17,8 +17,8 @@ namespace EDMS.Models {
     public class UserProfile {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
+        public int ID { get; set; }
+        public string LOGIN { get; set; }
     }
 
     public class RegisterExternalLoginModel {

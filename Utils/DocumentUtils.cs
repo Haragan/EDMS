@@ -40,5 +40,9 @@ namespace EDMS.Utils {
         public bool IsMayDelete(Document document) {
             return DocumentSatus.CONFIRMED.Equals(document.Status);
         }
+
+        public bool IsMaySendToModerator(Document document) {
+            return DocumentSatus.CREATED.Equals(document.Status);
+        }
     }
 }

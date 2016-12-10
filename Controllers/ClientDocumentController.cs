@@ -8,16 +8,19 @@ using System.Web.Mvc;
 using EDMS.Models;
 using WebMatrix.WebData;
 using EDMS.Utils;
+using EDMS.Filters;
 
 namespace EDMS.Controllers {
     [Authorize(Roles = "CLIENT")]
     public class ClientDocumentController : Controller {
         private Entities db = new Entities();
         private DocumentUtils documentUtils;
+        private UsersUtils usersUtils; 
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             base.Initialize(requestContext);
             this.documentUtils = new DocumentUtils(db);
+            this.usersUtils = new UsersUtils(db);
         }
 
         public ActionResult Index() {
@@ -119,6 +122,38 @@ namespace EDMS.Controllers {
         public ActionResult DeleteConfirmed(long id) {
             Document document = db.Documents.Find(id);
             db.Documents.Remove(document);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult SendToModerator(long id) {
+            Document document = db.Documents.Find(id);
+            if (document == null) {
+                return HttpNotFound();
+            }
+            if (!documentUtils.IsCurrentClientDocument(document)) {
+                TempData["message"] = "Вам не доступен этот документ";
+                return RedirectToAction("ActionDeny");
+            }
+            if (!documentUtils.IsMaySendToModerator(document)) {
+                TempData["message"] = "Вы не можете отправить документ модератору, он должен находиться в состоянии: " + DocumentSatus.CREATED;
+                return RedirectToAction("ActionDeny");
+            }
+            ViewBag.moderators = new SelectList(usersUtils.GetAllModerators(), "ID", "FIO", 1);
+            return View(document);
+        }
+
+        [HttpPost, ActionName("SendToModerator")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendToModeratorConfirm(FormCollection form) {
+            long documentId = long.Parse(form["document_id"]);
+            Document document = db.Documents.Single(d => d.ID == documentId);
+            document.Status = DocumentSatus.SEND_TO_MODERATOR;
+            long moderatorId = long.Parse(form["moderator_id"]);
+            ModeratorDocument md = new ModeratorDocument();
+            md.Document = document;
+            md.Moderator = db.UsersData.Where(u => u.ID == moderatorId).Single();
+            document.Moderators.Add(md);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

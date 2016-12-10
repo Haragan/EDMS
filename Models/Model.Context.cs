@@ -13,7 +13,7 @@ namespace EDMS.Models {
     using System.Data.Entity.Infrastructure;
 
     public partial class Entities : DbContext {
-        public Entities() : base("name=db_entities") { }
+        public Entities() : base("db_entities") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             throw new UnintentionalCodeFirstException();

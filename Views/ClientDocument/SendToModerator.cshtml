@@ -1,0 +1,49 @@
+﻿@model EDMS.Models.Document
+
+@{
+    ViewBag.Title = "Отправить модератору";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Документ</legend>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Number)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Number)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreateDate)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ConclusionDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ConclusionDate)
+        </div>
+        <div class="hidden-fields">
+            @Html.Hidden("document_id", Model.ID)
+        </div>
+        Выберите модератора : @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)<br />
+        <input type="submit" value="Отправить" />
+    </fieldset>
+}
+<p>
+    @Html.ActionLink("Вернуться к списку документов", "Index")
+</p>
