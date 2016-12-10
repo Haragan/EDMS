@@ -9,7 +9,7 @@ using EDMS.Models;
 
 namespace EDMS.Controllers {
     public class OrganizationController : Controller {
-        private emds_dbEntities db = new emds_dbEntities();
+        private Entities db = new Entities();
 
         public ActionResult Index() {
             return View(db.Organizations.ToList());

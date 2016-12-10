@@ -15,7 +15,7 @@ namespace EDMS.Controllers {
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller {
-        emds_dbEntities db = new emds_dbEntities();
+        Entities db = new Entities();
         UsersContext usersDb = new UsersContext();
 
         [AllowAnonymous]
