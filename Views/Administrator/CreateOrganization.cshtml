@@ -8,6 +8,10 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
+<div>
+    @Html.ActionLink("Вернуться к списку организаций", "OrganizationList")
+</div>
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -52,10 +56,6 @@
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Вернуться к списку организаций", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -8,6 +8,10 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
+<div>
+    @Html.ActionLink("Вернуться к списку организаций", "OrganizationList")
+</div>
+
 <h3>Вы уверены, что хотите удалить данную организацию?</h3>
 <fieldset>
     <legend>@ViewBag.Title</legend>
@@ -40,10 +44,10 @@
         @Html.DisplayFor(model => model.PhoneNumber)
     </div>
 </fieldset>
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Да"/>
-        @Html.ActionLink("Нет", "Index")
     </p>
 }

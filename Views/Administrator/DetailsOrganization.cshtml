@@ -8,6 +8,13 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
+<div>
+    @Html.ActionLink("Вернуться к списку организаций", "OrganizationList")
+</div>
+<div>
+    @Html.ActionLink("Редактировать", "EditOrganization", new { id = Model.ID }) 
+</div>
+
 <fieldset>
     <legend>@ViewBag.Title</legend>
 
@@ -39,7 +46,3 @@
         @Html.DisplayFor(model => model.PhoneNumber)
     </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Вернуться к списку организаций", "Index")
-</p>

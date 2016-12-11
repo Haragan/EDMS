@@ -12,7 +12,7 @@
     @Html.ActionLink("Вернуться к панели администратора", "Index")
 </div>
 <div>
-    @Html.ActionLink("Создать организацию", "Create")
+    @Html.ActionLink("Создать организацию", "CreateOrganization")
 </div>
 
 <table>
@@ -37,13 +37,13 @@
                 @Html.DisplayFor(modelItem => item.LegalAdress)
             </td>
             <td>
-                @Html.ActionLink("Посмотреть", "Details", new { id = item.ID })
+                @Html.ActionLink("Посмотреть", "DetailsOrganization", new { id = item.ID })
             </td>
             <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID })
+                @Html.ActionLink("Редактировать", "EditOrganization", new { id = item.ID })
             </td>
             <td>
-                @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
+                @Html.ActionLink("Удалить", "DeleteOrganization", new { id = item.ID })
             </td>
         </tr>
     }

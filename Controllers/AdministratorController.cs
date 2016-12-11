@@ -41,7 +41,7 @@ namespace EDMS.Controllers {
             if (ModelState.IsValid) {
                 db.Organizations.Add(organization);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("OrganizationList");
             }
 
             return View(organization);
@@ -61,7 +61,7 @@ namespace EDMS.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(organization).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("OrganizationList");
             }
             return View(organization);
         }
@@ -80,7 +80,7 @@ namespace EDMS.Controllers {
             Organization organization = db.Organizations.Find(id);
             db.Organizations.Remove(organization);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("OrganizationList");
         }
 
         public ActionResult UserList() {
