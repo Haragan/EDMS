@@ -44,5 +44,9 @@ namespace EDMS.Utils {
         public bool IsMaySendToModerator(Document document) {
             return DocumentSatus.CREATED.Equals(document.Status);
         }
+
+        public bool IsMaySendToClient(Document document) {
+            return DocumentSatus.CONFIRMED.Equals(document.Status);
+        }
     }
 }

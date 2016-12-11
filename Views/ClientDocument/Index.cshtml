@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<EDMS.Models.Document>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Список документов";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Создать документ", "Create")
 </p>
+
 <table>
     <tr>
         <th>
@@ -26,13 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ConclusionDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Organization.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Creator.FIO)
-        </th>
-        <th></th>
+        <th colspan="5">Действия</th>
     </tr>
 
     @foreach (var item in Model) {
@@ -53,17 +48,20 @@
                 @Html.DisplayFor(modelItem => item.ConclusionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Organization.Name)
+                @Html.ActionLink("Посмотреть", "Details", new { id = item.ID })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator.FIO)
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.ID })
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Отправить клиенту", "SendToClient", new { id = item.ID })
+            </td>
+            <td>
+                @Html.ActionLink("Отправить модератору", "SendToModerator", new { id = item.ID })
+            </td>
+            <td>
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
             </td>
         </tr>
     }
-
 </table>

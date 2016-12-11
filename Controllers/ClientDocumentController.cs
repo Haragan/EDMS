@@ -15,7 +15,7 @@ namespace EDMS.Controllers {
     public class ClientDocumentController : Controller {
         private Entities db = new Entities();
         private DocumentUtils documentUtils;
-        private UsersUtils usersUtils; 
+        private UsersUtils usersUtils;
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext) {
             base.Initialize(requestContext);
@@ -126,6 +126,43 @@ namespace EDMS.Controllers {
             return RedirectToAction("Index");
         }
 
+        public ActionResult SendToClient(long id) {
+            Document document = db.Documents.Find(id);
+            if (document == null) {
+                return HttpNotFound();
+            }
+            if (!documentUtils.IsCurrentClientDocument(document)) {
+                TempData["message"] = "Вам не доступен этот документ";
+                return RedirectToAction("ActionDeny");
+            }
+            if (!documentUtils.IsMaySendToClient(document)) {
+                TempData["message"] = "Вы не можете отправить документ другому клиенту, он должен находиться в состоянии: " + DocumentSatus.CONFIRMED;
+                return RedirectToAction("ActionDeny");
+            }
+            List<UserData> clients = usersUtils.GetAvailableClientsForDocument(document);
+            if (clients.Count == 0) {
+                TempData["message"] = "В данный момент нет доступных клиентов для отправки данного документа";
+                return RedirectToAction("ActionDeny");
+            }
+            ViewBag.clients = new SelectList(clients, "ID", "FIO", 1);
+            return View(document);
+        }
+
+        [HttpPost, ActionName("SendToClient")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendToClientConfirmed(FormCollection form) {
+            long documentID = long.Parse(form["document_id"]);
+            long clientID = long.Parse(form["client_id"]);
+            Document document = db.Documents.Find(documentID);
+            UserData client = db.UsersData.Find(clientID);
+            ClientDocument clientDocument = new ClientDocument();
+            clientDocument.Document = document;
+            clientDocument.Client = client;
+            db.ClientDocuments.Add(clientDocument);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         public ActionResult SendToModerator(long id) {
             Document document = db.Documents.Find(id);
             if (document == null) {
@@ -139,18 +176,23 @@ namespace EDMS.Controllers {
                 TempData["message"] = "Вы не можете отправить документ модератору, он должен находиться в состоянии: " + DocumentSatus.CREATED;
                 return RedirectToAction("ActionDeny");
             }
-            ViewBag.moderators = new SelectList(usersUtils.GetAllModerators(), "ID", "FIO", 1);
+            List<UserData> moderators = usersUtils.GetAvailableModeratorsForDocument(document);
+            if (moderators.Count == 0) {
+                TempData["message"] = "В данный момент нет достпуных модераторов для отправки данного документа";
+                return RedirectToAction("ActionDeny");
+            }
+            ViewBag.moderators = new SelectList(moderators, "ID", "FIO", 1);
             return View(document);
         }
 
         [HttpPost, ActionName("SendToModerator")]
         [ValidateAntiForgeryToken]
-        public ActionResult SendToModeratorConfirm(FormCollection form) {
+        public ActionResult SendToModeratorConfirmed(FormCollection form) {
             long documentId = long.Parse(form["document_id"]);
-            Document document = db.Documents.Single(d => d.ID == documentId);
-            document.Status = DocumentSatus.SEND_TO_MODERATOR;
             long moderatorId = long.Parse(form["moderator_id"]);
-            UserData moderator = db.UsersData.Single(u => u.ID == moderatorId);
+            Document document = db.Documents.Find(documentId);
+            UserData moderator = db.UsersData.Find(moderatorId);
+            document.Status = DocumentSatus.SEND_TO_MODERATOR;
             document.Moderator = moderator;
             db.Entry(document).State = EntityState.Modified;
             db.SaveChanges();

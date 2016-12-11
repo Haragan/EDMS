@@ -363,6 +363,7 @@
     <Content Include="Views\ClientDocument\ActionDeny.cshtml" />
     <Content Include="Views\ClientDocument\Workflow.cshtml" />
     <Content Include="Views\ClientDocument\SendToModerator.cshtml" />
+    <Content Include="Views\ClientDocument\SendToClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

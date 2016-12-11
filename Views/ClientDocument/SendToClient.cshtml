@@ -1,15 +1,15 @@
 ﻿@model EDMS.Models.Document
 
 @{
-    ViewBag.Title = "Информация о документе";
+    ViewBag.Title = "Отправить клиенту";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
+
+<div>
     @Html.ActionLink("Вернуться к списку документов", "Index")
-</p>
+</div>
 
 <div class="document_table_wrapper">
     <table class="document-table">
@@ -55,14 +55,6 @@
         </tr>
         <tr>
             <td>
-                Кем создан
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Creator.FIO)
-            </td>
-        </tr>
-        <tr>
-            <td>
                 @Html.DisplayNameFor(model => model.Organization.Name)
             </td>
             <td>
@@ -71,3 +63,25 @@
         </tr>
     </table>
 </div>
+
+<hr />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Document</legend>
+
+        <div class="hidden-fields">
+            @Html.Hidden("document_id", Model.ID)
+            <div>
+                Выберите клиента: @Html.DropDownList("client_id", (SelectList)ViewBag.clients)
+            </div>
+        </div>
+
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    </fieldset>
+}

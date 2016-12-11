@@ -5,42 +5,73 @@
 }
 
 <h2>@ViewBag.Title</h2>
+
+<div class="document_table_wrapper">
+    <table class="document-table">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Number)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Status)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CreateDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.ConclusionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ConclusionDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Organization.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Organization.Name)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<hr />
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <fieldset>
-        <legend>Документ</legend>
+        <legend>@ViewBag.Title</legend>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Number)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Number)
-        </div>
-
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Name)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Name)
-        </div>
-
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.CreateDate)
-        </div>
-
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.ConclusionDate)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.ConclusionDate)
-        </div>
         <div class="hidden-fields">
             @Html.Hidden("document_id", Model.ID)
+            <div>
+                Выберите модератора : @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)
+            </div>
         </div>
-        Выберите модератора : @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)<br />
         <input type="submit" value="Отправить" />
     </fieldset>
 }

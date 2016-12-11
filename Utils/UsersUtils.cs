@@ -37,17 +37,30 @@ namespace EDMS.Utils {
             return clients;
         }
 
-        public List<UserData> GetAllModerators() {
+        public List<UserData> GetAvailableModeratorsForDocument(Document document) {
             UsersContext uCtx = new UsersContext();
             List<UserData> moderators = new List<UserData>();
             uCtx.UserProfiles.ToList()
                 .ForEach(p => {
                     if (Roles.IsUserInRole(p.LOGIN, UserRole.MODERATOR.Code)) {
-                        moderators.Add(db.UsersData.Where(c => c.ProfileID == p.ID).Single());
+                        UserData moderator = db.UsersData.Single(c => c.ProfileID == p.ID);
+                        if (moderator.Organization.Equals(document.Organization)) {
+                            moderators.Add(moderator);
+                        }
                     }
                 });
             uCtx.Dispose();
             return moderators;
+        }
+
+        public List<UserData> GetAvailableClientsForDocument(Document document) {
+            List<UserData> allClients = GetAllClients();
+            allClients.Remove(GetCurrentUser());
+            List<ClientDocument> documentClients = document.ClientDocuments.ToList();
+            documentClients.ForEach(cd => {
+                allClients.Remove(cd.Client);
+            });
+            return allClients;
         }
     }
 }
