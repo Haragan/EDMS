@@ -348,16 +348,12 @@ aside {
         margin: 0;
     }
 
-    #loginForm input {
-        width: 250px;
+    #loginForm input[type="checkbox"],
+    #loginForm input[type="submit"],
+    #loginForm input[type="button"],
+    #loginForm button {
+        width: auto;
     }
-
-        #loginForm input[type="checkbox"],
-        #loginForm input[type="submit"],
-        #loginForm input[type="button"],
-        #loginForm button {
-            width: auto;
-        }
 
 #socialLoginForm {
     margin-left: 40px;
@@ -393,13 +389,13 @@ aside {
 
 /* forms */
 fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
+    border: 1px solid #c7d1d6;
+    border-radius: 5px;
+    text-align: center;
 }
 
     fieldset legend {
-        display: none;
+        font-size: 1.2em;
     }
 
     fieldset ol {
@@ -409,7 +405,13 @@ fieldset {
 
         fieldset ol li {
             padding-bottom: 5px;
+            position: relative;
         }
+
+            fieldset ol li label {
+                text-align: left;
+                padding-left: 315px;
+            }
 
 label {
     display: block;
@@ -421,7 +423,11 @@ label {
         display: inline;
     }
 
-input, textarea {
+select {
+    box-sizing: content-box;
+}
+
+input, textarea, select {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
@@ -497,6 +503,10 @@ td button {
 .field-validation-error {
     color: #e80c4d;
     font-weight: bold;
+    position: absolute;
+    margin-left: 5px;
+    word-wrap: break-word;
+    text-align: left;
 }
 
 .field-validation-valid {
