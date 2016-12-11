@@ -36,6 +36,7 @@ namespace EDMS.Controllers {
                 TempData["message"] = "Вам не доступен этот документ";
                 return RedirectToAction("ActionDeny");
             }
+            @ViewBag.IsMayCommit = documentUtils.IsMayToCommit(document);
             return View(document);
         }
 

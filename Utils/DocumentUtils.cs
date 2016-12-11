@@ -48,5 +48,9 @@ namespace EDMS.Utils {
         public bool IsMaySendToClient(Document document) {
             return DocumentSatus.CONFIRMED.Equals(document.Status);
         }
+
+        public bool IsMayToCommit(Document document) {
+            return DocumentSatus.CONFIRMED.Equals(document.Status) && document.CreatorID == userUtils.GetCurrentUser().ID;
+        }
     }
 }
