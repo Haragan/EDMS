@@ -507,6 +507,7 @@ td button {
     margin-left: 5px;
     word-wrap: break-word;
     text-align: left;
+    width: 300px;
 }
 
 .field-validation-valid {

@@ -43,6 +43,7 @@ namespace EDMS.Controllers {
             Document document = new Document();
             UserData currentUser = db.UsersData.Where(u => u.ProfileID == WebSecurity.CurrentUserId).Single();
             document.CreateDate = DateTime.Now;
+            document.ConclusionDate = DateTime.Now.AddDays(1);
             document.CreatorID = currentUser.ID;
             document.OrganizationID = currentUser.Organization.ID;
             document.Status = DocumentSatus.INIT;

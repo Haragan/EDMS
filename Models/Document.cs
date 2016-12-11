@@ -12,7 +12,7 @@ namespace EDMS.Models {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Document {
+    public partial class Document : IValidatableObject {
         public Document() {
             this.ClientDocuments = new HashSet<ClientDocument>();
         }
@@ -40,6 +40,7 @@ namespace EDMS.Models {
         [Required]
         [Display(Name = "Дата заключения")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime ConclusionDate { get; set; }
 
         [Required]
@@ -56,5 +57,13 @@ namespace EDMS.Models {
         public virtual UserData Creator { get; set; }
         public virtual UserData Moderator { get; set; }
         public virtual Organization Organization { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
+            if (ConclusionDate < CreateDate) {
+                yield return new ValidationResult(
+                    errorMessage: "Дата заключения должна быть после даты создания",
+                    memberNames: new[] { "ConclusionDate" });
+            }
+        }
     }
 }

@@ -6,12 +6,14 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>@ViewBag.Title</legend>
+    
+        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Number)
@@ -46,27 +48,27 @@
         </div>
 
         <p>
-            <input type="submit" value="Сохранить"/>
+            <input type="submit" value="Сохранить" />
         </p>
-    </fieldset>
-}
+    }
 
-@using (Html.BeginForm("CancelEdit", "Client")) {
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("CancelEdit", "Client")) {
+        @Html.AntiForgeryToken()
 
-    @Html.HiddenFor(model => model.ID)
-    @Html.HiddenFor(model => model.Number)
-    @Html.HiddenFor(model => model.Name)
-    @Html.HiddenFor(model => model.ConclusionDate)
-    @Html.HiddenFor(model => model.Status)
-    @Html.HiddenFor(model => model.CreateDate)
-    @Html.HiddenFor(model => model.OrganizationID)
-    @Html.HiddenFor(model => model.CreatorID)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Number)
+        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.ConclusionDate)
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.CreateDate)
+        @Html.HiddenFor(model => model.OrganizationID)
+        @Html.HiddenFor(model => model.CreatorID)
 
-    <p>
-        <input type="submit" value="Отменить"/>
-    </p>
-}
+        <p>
+            <input type="submit" value="Отменить" />
+        </p>
+    }
+</fieldset>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
