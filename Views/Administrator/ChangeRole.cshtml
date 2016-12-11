@@ -38,26 +38,19 @@
         @Html.DisplayNameFor(model => model.OrganizationID)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.OrganizationID)
+        @Html.DisplayFor(model => model.Organization.Name)
     </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ProfileID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ProfileID)
-    </div>
-</fieldset>
-
-@using (Html.BeginForm()) {
+    @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <div class="hidden-fields">
         @Html.Hidden("user_id", Model.ID)
         <div>
-            Новая роль: @Html.DropDownList("new_role", (SelectList)ViewBag.roles)
+            @Html.DropDownList("new_role", (SelectList)ViewBag.roles)
         </div>
     </div>
     <p>
         <input type="submit" value="Сохранить" />
     </p>
 }
+</fieldset>

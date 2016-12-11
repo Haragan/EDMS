@@ -27,9 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.OrganizationID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileID)
-        </th>
         <th colspan="2">Действия</th>
     </tr>
 
@@ -45,10 +42,7 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrganizationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfileID)
+                @Html.DisplayFor(modelItem => item.Organization.Name)
             </td>
             <td>
                 @Html.ActionLink("Изменить роль", "ChangeRole", new { id = item.ID })
