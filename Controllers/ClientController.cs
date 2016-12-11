@@ -11,7 +11,7 @@ using EDMS.Utils;
 using EDMS.Filters;
 
 namespace EDMS.Controllers {
-    [Authorize(Roles = "CLIENT")]
+    [Authorize(Roles = UserRole.CLIENT)]
     public class ClientController : Controller {
         private Entities db = new Entities();
         private DocumentUtils documentUtils;

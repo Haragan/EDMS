@@ -29,7 +29,13 @@ namespace EDMS.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl) {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: false)) {
-                return RedirectToLocal(returnUrl);
+                String userRole = Roles.GetRolesForUser(model.UserName)[0];
+                switch (userRole) {
+                    case UserRole.CLIENT:
+                        return RedirectToAction("Index", "Client");
+                    case UserRole.MODERATOR:
+                        return RedirectToAction("Index", "Moderator");
+                }
             }
 
             ModelState.AddModelError("", "Имя пользователя или пароль указаны неверно.");
@@ -40,8 +46,7 @@ namespace EDMS.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult LogOff() {
             WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Organization");
+            return RedirectToAction("Login");
         }
 
         [AllowAnonymous]
@@ -68,7 +73,7 @@ namespace EDMS.Controllers {
                     db.UsersData.Add(userData);
                     db.SaveChanges();
 
-                    Roles.AddUserToRole(model.UserName, UserRole.CLIENT.Code);
+                    Roles.AddUserToRole(model.UserName, UserRole.CLIENT);
                     return RedirectToAction("Index", "Organization");
                 } catch (MembershipCreateUserException e) {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));

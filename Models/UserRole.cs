@@ -5,19 +5,10 @@ using System.Web;
 
 namespace EDMS.Models {
     public class UserRole {
-        private String code;
-        private String name;
+        public const String ADMINISTRATOR = "ADMINISTRATOR";
+        public const String MODERATOR = "MODERATOR";
+        public const String CLIENT = "CLIENT";
 
-        public String Name { get { return name; } }
-        public String Code { get { return code; } }
-
-        public static readonly UserRole ADMINISTRATOR = new UserRole("ADMINISTRATOR", "Администратор");
-        public static readonly UserRole MODERATOR = new UserRole("MODERATOR", "Модератор");
-        public static readonly UserRole CLIENT = new UserRole("CLIENT", "Клиент");
-
-        private UserRole(String code, String name) {
-            this.code = code;
-            this.name = name;
-        }
+        private UserRole() { }
     }
 }

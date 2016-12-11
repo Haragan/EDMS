@@ -1,10 +1,10 @@
 ﻿@model EDMS.Models.Document
 
 @{
-    ViewBag.Title = "Отправить модератору";
+    ViewBag.Title = "Details";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Details</h2>
 
 <div>
     @Html.ActionLink("Вернуться к списку документов", "Index")
@@ -53,6 +53,13 @@
             </td>
         </tr>
         <tr>
+            <td>Кем создан
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Creator.FIO)
+            </td>
+        </tr>
+        <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Organization.Name)
             </td>
@@ -63,19 +70,23 @@
     </table>
 </div>
 
-<hr />
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <fieldset>
-        <legend>@ViewBag.Title</legend>
+<div>
+    @using (Html.BeginForm("Confirm", "Moderator")) {
+        @Html.AntiForgeryToken()
 
         <div class="hidden-fields">
             @Html.Hidden("document_id", Model.ID)
-            <div>
-                Выберите модератора : @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)
-            </div>
         </div>
-        <input type="submit" value="Отправить" />
-    </fieldset>
-}
+        <input type="submit" value="Подтвердить" />
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("Reject", "Moderator")) {
+        @Html.AntiForgeryToken()
+        <div class="hidden-fields">
+            @Html.Hidden("document_id", Model.ID)
+        </div>
+        <input type="submit" value="Отклонить" />
+    }
+</div>

@@ -184,7 +184,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClientDocumentController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -355,15 +356,17 @@
     <Content Include="Views\Organization\Create.cshtml" />
     <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Organization\Delete.cshtml" />
-    <Content Include="Views\ClientDocument\Index.cshtml" />
-    <Content Include="Views\ClientDocument\Details.cshtml" />
-    <Content Include="Views\ClientDocument\Create.cshtml" />
-    <Content Include="Views\ClientDocument\Edit.cshtml" />
-    <Content Include="Views\ClientDocument\Delete.cshtml" />
-    <Content Include="Views\ClientDocument\ActionDeny.cshtml" />
-    <Content Include="Views\ClientDocument\Workflow.cshtml" />
-    <Content Include="Views\ClientDocument\SendToModerator.cshtml" />
-    <Content Include="Views\ClientDocument\SendToClient.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\Details.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\Delete.cshtml" />
+    <Content Include="Views\Client\ActionDeny.cshtml" />
+    <Content Include="Views\Client\Workflow.cshtml" />
+    <Content Include="Views\Client\SendToModerator.cshtml" />
+    <Content Include="Views\Client\SendToClient.cshtml" />
+    <Content Include="Views\Moderator\Index.cshtml" />
+    <Content Include="Views\Moderator\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

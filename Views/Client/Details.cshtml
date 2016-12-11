@@ -54,8 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td>
-                Кем создан
+            <td>Кем создан
             </td>
             <td>
                 @Html.DisplayFor(model => model.Creator.FIO)
@@ -69,5 +68,15 @@
                 @Html.DisplayFor(model => model.Organization.Name)
             </td>
         </tr>
+        @if (Model.Moderator != null) {
+            <tr>
+                <td>
+                    Кому отправлено на проверку
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Moderator.FIO)
+                </td>
+            </tr>
+        }
     </table>
 </div>

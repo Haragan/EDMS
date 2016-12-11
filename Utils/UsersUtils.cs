@@ -29,7 +29,7 @@ namespace EDMS.Utils {
             uCtx.UserProfiles.ToList()
                 .ForEach(p => {
                     if (p.ID != currentUserId &&
-                        Roles.IsUserInRole(p.LOGIN, UserRole.CLIENT.Code)) {
+                        Roles.IsUserInRole(p.LOGIN, UserRole.CLIENT)) {
                         clients.Add(db.UsersData.Where(c => c.ProfileID == p.ID).Single());
                     }
                 });
@@ -42,7 +42,7 @@ namespace EDMS.Utils {
             List<UserData> moderators = new List<UserData>();
             uCtx.UserProfiles.ToList()
                 .ForEach(p => {
-                    if (Roles.IsUserInRole(p.LOGIN, UserRole.MODERATOR.Code)) {
+                    if (Roles.IsUserInRole(p.LOGIN, UserRole.MODERATOR)) {
                         UserData moderator = db.UsersData.Single(c => c.ProfileID == p.ID);
                         if (moderator.Organization.Equals(document.Organization)) {
                             moderators.Add(moderator);
