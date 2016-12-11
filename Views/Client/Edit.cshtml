@@ -51,7 +51,7 @@
     </fieldset>
 }
 
-@using (Html.BeginForm("CancelEdit", "ClientDocument")) {
+@using (Html.BeginForm("CancelEdit", "Client")) {
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(model => model.ID)

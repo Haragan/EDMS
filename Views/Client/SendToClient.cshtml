@@ -1,16 +1,15 @@
 ﻿@model EDMS.Models.Document
 
 @{
-    ViewBag.Title = "Удалить документ";
+    ViewBag.Title = "Отправить клиенту";
 }
 
 <h2>@ViewBag.Title</h2>
 
+
 <div>
     @Html.ActionLink("Вернуться к списку документов", "Index")
 </div>
-
-<h3>Вы действительно хотите удалить этот документ?</h3>
 
 <div class="document_table_wrapper">
     <table class="document-table">
@@ -55,13 +54,6 @@
             </td>
         </tr>
         <tr>
-            <td>Кем создан
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Creator.FIO)
-            </td>
-        </tr>
-        <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Organization.Name)
             </td>
@@ -72,9 +64,23 @@
     </table>
 </div>
 
+<hr />
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Подтвердить" />
-    </p>
+
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        <div class="hidden-fields">
+            @Html.Hidden("document_id", Model.ID)
+            <div>
+                Выберите клиента: @Html.DropDownList("client_id", (SelectList)ViewBag.clients)
+            </div>
+        </div>
+
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    </fieldset>
 }
