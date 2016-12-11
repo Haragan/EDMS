@@ -71,7 +71,7 @@ namespace EDMS.Controllers {
                 return RedirectToAction("ActionDeny");
             }
             if (!documentUtils.IsMayEdit(document)) {
-                TempData["message"] = "Вы не можете редактировать данный документ, документ должен находться в соотвествующем состоянии";
+                TempData["message"] = ErrorMessage("редактировать");
                 return RedirectToAction("ActionDeny");
             }
             document.Status = DocumentSatus.EDITING;
@@ -111,7 +111,7 @@ namespace EDMS.Controllers {
                 return RedirectToAction("ActionDeny");
             }
             if (!documentUtils.IsMayDelete(document)) {
-                TempData["message"] = "Вы не можете удалить данный документ, он находится не в том состоянии";
+                TempData["message"] = ErrorMessage("удалить");
                 return RedirectToAction("ActionDeny");
             }
             return View(document);
@@ -136,7 +136,7 @@ namespace EDMS.Controllers {
                 return RedirectToAction("ActionDeny");
             }
             if (!documentUtils.IsMaySendToClient(document)) {
-                TempData["message"] = "Вы не можете отправить документ другому клиенту, он должен находиться в состоянии: " + DocumentSatus.CONFIRMED;
+                TempData["message"] = ErrorMessage("отправить другому клиенту");
                 return RedirectToAction("ActionDeny");
             }
             List<UserData> clients = usersUtils.GetAvailableClientsForDocument(document);
@@ -173,12 +173,12 @@ namespace EDMS.Controllers {
                 return RedirectToAction("ActionDeny");
             }
             if (!documentUtils.IsMaySendToModerator(document)) {
-                TempData["message"] = "Вы не можете отправить документ модератору, он должен находиться в состоянии: " + DocumentSatus.CREATED;
+                TempData["message"] = ErrorMessage("отправить модератору");
                 return RedirectToAction("ActionDeny");
             }
             List<UserData> moderators = usersUtils.GetAvailableModeratorsForDocument(document);
             if (moderators.Count == 0) {
-                TempData["message"] = "В данный момент нет достпуных модераторов для отправки данного документа";
+                TempData["message"] = "В данный момент нет доступных модераторов для отправки данного документа";
                 return RedirectToAction("ActionDeny");
             }
             ViewBag.moderators = new SelectList(moderators, "ID", "FIO", 1);
@@ -216,6 +216,10 @@ namespace EDMS.Controllers {
 
         public ActionResult Workflow() {
             return View();
+        }
+
+        private String ErrorMessage(String action) {
+            return "Вы не можете " + action + " данный документ, т.к. он находится в статусе, в котором невозможно выполнить данное действие.";
         }
 
         protected override void Dispose(bool disposing) {
