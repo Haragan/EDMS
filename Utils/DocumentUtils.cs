@@ -22,8 +22,8 @@ namespace EDMS.Utils {
         public List<Document> GetClientDocuments(long clientID) {
             UserData currentUser = db.UsersData.Where(u => u.ProfileID == clientID).Single();
             List<Document> documents = new List<Document>();
-            documents.AddRange(currentUser.Documents);
-            documents.AddRange(currentUser.ClientDocuments.Select(cd => cd.Docuent));
+            documents.AddRange(currentUser.CreatorDocumens);
+            documents.AddRange(currentUser.ClientDocuments.Select(cd => cd.Document));
             return documents;
         }
 

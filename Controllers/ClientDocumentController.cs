@@ -150,10 +150,9 @@ namespace EDMS.Controllers {
             Document document = db.Documents.Single(d => d.ID == documentId);
             document.Status = DocumentSatus.SEND_TO_MODERATOR;
             long moderatorId = long.Parse(form["moderator_id"]);
-            ModeratorDocument md = new ModeratorDocument();
-            md.Document = document;
-            md.Moderator = db.UsersData.Where(u => u.ID == moderatorId).Single();
-            document.Moderators.Add(md);
+            UserData moderator = db.UsersData.Single(u => u.ID == moderatorId);
+            document.Moderator = moderator;
+            db.Entry(document).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

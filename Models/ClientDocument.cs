@@ -16,7 +16,7 @@ namespace EDMS.Models {
         public long ClientID { get; set; }
         public long DocumentID { get; set; }
 
-        public virtual Document Docuent { get; set; }
+        public virtual Document Document { get; set; }
         public virtual UserData Client { get; set; }
     }
 }

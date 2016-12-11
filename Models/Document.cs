@@ -13,8 +13,7 @@ namespace EDMS.Models {
 
     public partial class Document {
         public Document() {
-            this.Clients = new HashSet<ClientDocument>();
-            this.Moderators = new HashSet<ModeratorDocument>();
+            this.ClientDocuments = new HashSet<ClientDocument>();
         }
 
         public long ID { get; set; }
@@ -22,13 +21,14 @@ namespace EDMS.Models {
         public string Name { get; set; }
         public string Status { get; set; }
         public System.DateTime CreateDate { get; set; }
-        public Nullable<System.DateTime> ConclusionDate { get; set; }
+        public System.DateTime ConclusionDate { get; set; }
         public long OrganizationID { get; set; }
         public long CreatorID { get; set; }
+        public Nullable<long> ModeratorID { get; set; }
 
-        public virtual ICollection<ClientDocument> Clients { get; set; }
-        public virtual ICollection<ModeratorDocument> Moderators { get; set; }
+        public virtual ICollection<ClientDocument> ClientDocuments { get; set; }
         public virtual UserData Creator { get; set; }
+        public virtual UserData Moderator { get; set; }
         public virtual Organization Organization { get; set; }
     }
 }

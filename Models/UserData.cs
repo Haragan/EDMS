@@ -14,8 +14,8 @@ namespace EDMS.Models {
     public partial class UserData {
         public UserData() {
             this.ClientDocuments = new HashSet<ClientDocument>();
-            this.ModeratorDocuments = new HashSet<ModeratorDocument>();
-            this.Documents = new HashSet<Document>();
+            this.CreatorDocumens = new HashSet<Document>();
+            this.ModeratorDocuments = new HashSet<Document>();
         }
 
         public long ID { get; set; }
@@ -26,8 +26,8 @@ namespace EDMS.Models {
         public int ProfileID { get; set; }
 
         public virtual ICollection<ClientDocument> ClientDocuments { get; set; }
+        public virtual ICollection<Document> CreatorDocumens { get; set; }
+        public virtual ICollection<Document> ModeratorDocuments { get; set; }
         public virtual Organization Organization { get; set; }
-        public virtual ICollection<ModeratorDocument> ModeratorDocuments { get; set; }
-        public virtual ICollection<Document> Documents { get; set; }
     }
 }

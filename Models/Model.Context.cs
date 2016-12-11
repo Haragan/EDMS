@@ -13,7 +13,9 @@ namespace EDMS.Models {
     using System.Data.Entity.Infrastructure;
 
     public partial class Entities : DbContext {
-        public Entities() : base("db_entities") { }
+        public Entities()
+            : base("name=Entities") {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             throw new UnintentionalCodeFirstException();
@@ -23,6 +25,5 @@ namespace EDMS.Models {
         public DbSet<Document> Documents { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<UserData> UsersData { get; set; }
-        public DbSet<ModeratorDocument> ModeratorDocuments { get; set; }
     }
 }

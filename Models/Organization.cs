@@ -13,8 +13,8 @@ namespace EDMS.Models {
 
     public partial class Organization {
         public Organization() {
-            this.Users = new HashSet<UserData>();
             this.Documents = new HashSet<Document>();
+            this.Users = new HashSet<UserData>();
         }
 
         public long ID { get; set; }
@@ -23,7 +23,7 @@ namespace EDMS.Models {
         public int Postcode { get; set; }
         public string PhoneNumber { get; set; }
 
-        public virtual ICollection<UserData> Users { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<UserData> Users { get; set; }
     }
 }

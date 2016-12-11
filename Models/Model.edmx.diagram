@@ -5,18 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0d54127b92814f65b1bafe04bbe2270d" Name="Диаграмма1">
-        <EntityTypeShape EntityType="Model.ClientDocument" Width="1.5" PointX="6.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="3.875" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Organization" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UserData" Width="1.5" PointX="4.125" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_CLIENT_DOCUMENT_DOCUMENT" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_CLIENT_DOCUMENT_USER" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_USER_ORGANIZATION" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.ModeratorDocument" Width="1.5" PointX="1.125" PointY="4.875" />
-        <AssociationConnector Association="Model.FK_MODERATOR_DOCUMENT_DOCUMENT" />
-        <AssociationConnector Association="Model.FK_MODERATOR_DOCUMENT_USER" />
-        <AssociationConnector Association="Model.FK_DOCUMENT_USER" />
+        <EntityTypeShape EntityType="Model.ClientDocument" Width="1.5" PointX="7.625" PointY="1.25" />
+        <EntityTypeShape EntityType="Model.Document" Width="1.5" PointX="3.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.Organization" Width="1.5" PointX="0.625" PointY="1.25" />
+        <EntityTypeShape EntityType="Model.UserData" Width="1.5" PointX="3.75" PointY="5.5" />
+        <AssociationConnector Association="Model.FK_CLIENT_DOCUMENT_DOCUMENT" />
+        <AssociationConnector Association="Model.FK_CLIENT_DOCUMENT_USER" />
+        <AssociationConnector Association="Model.FK_DOCUMENT_CREATOR" />
+        <AssociationConnector Association="Model.FK_DOCUMENT_MODERATOR" />
         <AssociationConnector Association="Model.FK_DOCUMENT_ORGANIZATION" />
+        <AssociationConnector Association="Model.FK_USER_ORGANIZATION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
