@@ -9,6 +9,15 @@ namespace EDMS.Models {
         public const String MODERATOR = "MODERATOR";
         public const String CLIENT = "CLIENT";
 
+        private static List<String> allRoles;
+
         private UserRole() { }
+
+        public static List<String> List() {
+            if (allRoles == null) {
+                allRoles = new List<String> { ADMINISTRATOR, MODERATOR, CLIENT };
+            }
+            return allRoles;
+        }
     }
 }

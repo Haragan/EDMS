@@ -188,12 +188,23 @@ namespace EDMS.Controllers {
         [HttpPost, ActionName("SendToModerator")]
         [ValidateAntiForgeryToken]
         public ActionResult SendToModeratorConfirmed(FormCollection form) {
-            long documentId = long.Parse(form["document_id"]);
-            long moderatorId = long.Parse(form["moderator_id"]);
-            Document document = db.Documents.Find(documentId);
-            UserData moderator = db.UsersData.Find(moderatorId);
+            long documentID = long.Parse(form["document_id"]);
+            long moderatorID = long.Parse(form["moderator_id"]);
+            Document document = db.Documents.Find(documentID);
+            UserData moderator = db.UsersData.Find(moderatorID);
             document.Status = DocumentSatus.SEND_TO_MODERATOR;
             document.Moderator = moderator;
+            db.Entry(document).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Commit(FormCollection form) {
+            long documentID = long.Parse(form["document_id"]);
+            Document document = db.Documents.Find(documentID);
+            document.Status = DocumentSatus.READY;
             db.Entry(document).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");

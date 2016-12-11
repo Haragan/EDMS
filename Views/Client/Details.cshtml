@@ -70,8 +70,7 @@
         </tr>
         @if (Model.Moderator != null) {
             <tr>
-                <td>
-                    Кому отправлено на проверку
+                <td>Кому отправлено на проверку
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Moderator.FIO)
@@ -80,3 +79,15 @@
         }
     </table>
 </div>
+
+@if (EDMS.Models.DocumentSatus.CONFIRMED.Equals(Model.Status)) {
+    <div>
+        @using (Html.BeginForm("Commit", "Client")) {
+            @Html.AntiForgeryToken()
+            <div class="hidden-fields">
+                @Html.Hidden("document_id", Model.ID)
+            </div>
+            <input type="submit" value="Зафиксировать" />
+        }
+    </div>
+}

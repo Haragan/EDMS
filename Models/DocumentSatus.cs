@@ -6,7 +6,7 @@ using System.Web;
 namespace EDMS.Models {
     public class DocumentSatus {
 
-        public const string INIT = "INIT";
+        public const string INIT = "INIT"; //технический системный статус
         public const string CREATED = "Создан";
         public const string SEND_TO_MODERATOR = "Отправлен модератору";
         public const string EDITING = "Редактируется";
