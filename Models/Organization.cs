@@ -10,6 +10,7 @@
 namespace EDMS.Models {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Organization {
         public Organization() {
@@ -17,10 +18,23 @@ namespace EDMS.Models {
             this.Users = new HashSet<UserData>();
         }
 
+        [Key]
         public long ID { get; set; }
+
+        [Required]
+        [Display(Name = "Название огранизации")]
         public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Юридический адрес")]
         public string LegalAdress { get; set; }
+
+        [Required]
+        [Display(Name = "Почтовый индекс")]
         public int Postcode { get; set; }
+
+        [Required]
+        [Display(Name = "Телефонный номер")]
         public string PhoneNumber { get; set; }
 
         public virtual ICollection<Document> Documents { get; set; }

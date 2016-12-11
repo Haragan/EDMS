@@ -408,7 +408,7 @@ fieldset {
             position: relative;
         }
 
-            fieldset ol li label {
+            fieldset ol li label, .editor-label {
                 text-align: left;
                 padding-left: 315px;
             }
