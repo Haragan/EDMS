@@ -30,12 +30,7 @@ namespace EDMS.Controllers {
         public ActionResult Login(LoginModel model, string returnUrl) {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: false)) {
                 String userRole = Roles.GetRolesForUser(model.UserName)[0];
-                switch (userRole) {
-                    case UserRole.CLIENT:
-                        return RedirectToAction("Index", "Client");
-                    case UserRole.MODERATOR:
-                        return RedirectToAction("Index", "Moderator");
-                }
+                return RedirectToAction("Index", userRole.ToLower());
             }
 
             ModelState.AddModelError("", "Имя пользователя или пароль указаны неверно.");
@@ -51,7 +46,7 @@ namespace EDMS.Controllers {
 
         [AllowAnonymous]
         public ActionResult Register() {
-            ViewBag.orgList = new SelectList(db.Organizations.AsEnumerable(), "ID", "NAME", 1);
+            ViewBag.orgList = new SelectList(db.Organizations.ToList(), "ID", "Name", 1);
             return View();
         }
 
@@ -74,11 +69,12 @@ namespace EDMS.Controllers {
                     db.SaveChanges();
 
                     Roles.AddUserToRole(model.UserName, UserRole.CLIENT);
-                    return RedirectToAction("Index", "Organization");
+                    return RedirectToAction("Index", UserRole.CLIENT);
                 } catch (MembershipCreateUserException e) {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
+            ViewBag.orgList = new SelectList(db.Organizations.ToList(), "ID", "Name", 1);
             return View(model);
         }
 

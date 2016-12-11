@@ -186,7 +186,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
-    <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -351,11 +351,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Organization\Index.cshtml" />
-    <Content Include="Views\Organization\Details.cshtml" />
-    <Content Include="Views\Organization\Create.cshtml" />
-    <Content Include="Views\Organization\Edit.cshtml" />
-    <Content Include="Views\Organization\Delete.cshtml" />
+    <Content Include="Views\Administrator\OrganizationList.cshtml" />
+    <Content Include="Views\Administrator\DetailsOrganization.cshtml" />
+    <Content Include="Views\Administrator\CreateOrganization.cshtml" />
+    <Content Include="Views\Administrator\EditOrganization.cshtml" />
+    <Content Include="Views\Administrator\DeleteOrganization.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Details.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
@@ -367,6 +367,11 @@
     <Content Include="Views\Client\SendToClient.cshtml" />
     <Content Include="Views\Moderator\Index.cshtml" />
     <Content Include="Views\Moderator\Details.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\UserList.cshtml" />
+    <Content Include="Views\Administrator\CreateUser.cshtml" />
+    <Content Include="Views\Administrator\ChangeRole.cshtml" />
+    <Content Include="Views\Administrator\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

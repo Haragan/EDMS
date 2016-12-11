@@ -1,0 +1,63 @@
+﻿@model EDMS.Models.UserData
+
+@{
+    ViewBag.Title = "Смена роли пользователя";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Вернуться к списку пользователей", "UserList")
+</div>
+
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FIO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FIO)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.OrganizationID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrganizationID)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ProfileID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProfileID)
+    </div>
+</fieldset>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="hidden-fields">
+        @Html.Hidden("user_id", Model.ID)
+        <div>
+            Новая роль: @Html.DropDownList("new_role", (SelectList)ViewBag.roles)
+        </div>
+    </div>
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
+}

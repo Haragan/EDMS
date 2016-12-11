@@ -8,9 +8,13 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
-<p>
+<div>
+    @Html.ActionLink("Вернуться к панели администратора", "Index")
+</div>
+<div>
     @Html.ActionLink("Создать организацию", "Create")
-</p>
+</div>
+
 <table>
     <tr>
         <th>
@@ -20,13 +24,7 @@
             @Html.DisplayNameFor(model => model.LegalAdress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th colspan="3">
-            Действия
+        <th colspan="3">Действия
         </th>
     </tr>
 
@@ -39,12 +37,6 @@
                 @Html.DisplayFor(modelItem => item.LegalAdress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Postcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
                 @Html.ActionLink("Посмотреть", "Details", new { id = item.ID })
             </td>
             <td>
@@ -55,5 +47,4 @@
             </td>
         </tr>
     }
-
 </table>

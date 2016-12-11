@@ -1,0 +1,61 @@
+﻿@model EDMS.Models.UserData
+
+@{
+    ViewBag.Title = "Удалить пользователя";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Вернуться к списку пользователей", "UserList")
+</div>
+
+<h3>Вы действительно хотите удалить пользователя?</h3>
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FIO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FIO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrganizationID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrganizationID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProfileID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProfileID)
+    </div>
+</fieldset>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="hidden-fields">
+        @Html.HiddenFor(model => model.ID)
+    </div>
+    <p>
+        <input type="submit" value="Удалить" /> |
+    </p>
+}

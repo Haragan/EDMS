@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace EDMS.Models {
     public class UserRole {
@@ -9,13 +10,18 @@ namespace EDMS.Models {
         public const String MODERATOR = "MODERATOR";
         public const String CLIENT = "CLIENT";
 
-        private static List<String> allRoles;
+        private static SelectList allRoles;
 
         private UserRole() { }
 
-        public static List<String> List() {
+        public static SelectList SelectList() {
             if (allRoles == null) {
-                allRoles = new List<String> { ADMINISTRATOR, MODERATOR, CLIENT };
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                items.Add(new SelectListItem() { Value = ADMINISTRATOR, Text = "Администратор" });
+                items.Add(new SelectListItem() { Value = MODERATOR, Text = "Модератор" });
+                items.Add(new SelectListItem() { Value = CLIENT, Text = "Клиент", Selected = true });
+                allRoles = new SelectList(items, "Value", "Text");
             }
             return allRoles;
         }

@@ -92,6 +92,9 @@ namespace EDMS.Models {
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name="Роль пользователя")]
+        public string Role { get; set; }
     }
 
     public class ExternalLogin {

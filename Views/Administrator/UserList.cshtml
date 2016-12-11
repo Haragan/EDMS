@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EDMS.Models.UserData>
+
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("Вернуться к панели администратора", "Index")
+</div>
+<div>
+    @Html.ActionLink("Добавить пользователя", "CreateUser")
+</div>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileID)
+        </th>
+        <th colspan="2">Действия</th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfileID)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить роль", "ChangeRole", new { id = item.ID })
+            </td>
+            <td>
+                @Html.ActionLink("Удалить пользователя", "DeleteUser", new { id = item.ID })
+            </td>
+        </tr>
+    }
+</table>
