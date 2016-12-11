@@ -13,44 +13,51 @@
 <fieldset>
     <legend>@ViewBag.Title</legend>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.FIO)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FIO)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.PhoneNumber)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PhoneNumber)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.OrganizationID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Organization.Name)
-    </div>
+    <table class="details-data">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FIO)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.OrganizationID)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Organization.Name)
+            </td>
+        </tr>
+    </table>
 
     @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <div class="hidden-fields">
-        @Html.Hidden("user_id", Model.ID)
-        <div>
-            @Html.DropDownList("new_role", (SelectList)ViewBag.roles)
+        @Html.AntiForgeryToken()
+        <div class="hidden-fields">
+            @Html.Hidden("user_id", Model.ID)
+            <div>
+                @Html.DropDownList("new_role", (SelectList)ViewBag.roles)
+            </div>
         </div>
-    </div>
-    <p>
-        <input type="submit" value="Сохранить" />
-    </p>
-}
+        <p>
+            <input type="submit" value="Изменить" />
+        </p>
+    }
 </fieldset>

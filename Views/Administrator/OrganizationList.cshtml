@@ -9,13 +9,11 @@
 </hgroup>
 
 <div>
-    @Html.ActionLink("Вернуться к панели администратора", "Index")
-</div>
-<div>
+    @Html.ActionLink("Вернуться к панели администратора", "Index") |
     @Html.ActionLink("Создать организацию", "CreateOrganization")
 </div>
 
-<table>
+<table class="data-table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)

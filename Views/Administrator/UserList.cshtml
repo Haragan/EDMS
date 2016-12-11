@@ -7,13 +7,11 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    @Html.ActionLink("Вернуться к панели администратора", "Index")
-</div>
-<div>
+    @Html.ActionLink("Вернуться к панели администратора", "Index") |
     @Html.ActionLink("Добавить пользователя", "CreateUser")
 </div>
 
-<table>
+<table class="data-table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FIO)

@@ -9,40 +9,45 @@
 </hgroup>
 
 <div>
-    @Html.ActionLink("Вернуться к списку организаций", "OrganizationList")
-</div>
-<div>
-    @Html.ActionLink("Редактировать", "EditOrganization", new { id = Model.ID }) 
+    @Html.ActionLink("Вернуться к списку организаций", "OrganizationList") |
+    @Html.ActionLink("Редактировать", "EditOrganization", new { id = Model.ID })
 </div>
 
 <fieldset>
     <legend>@ViewBag.Title</legend>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.LegalAdress)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LegalAdress)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Postcode)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Postcode)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.PhoneNumber)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PhoneNumber)
-    </div>
+    <table class="details-data">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.LegalAdress)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LegalAdress)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Postcode)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Postcode)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+    </table>
 </fieldset>

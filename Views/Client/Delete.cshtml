@@ -12,8 +12,9 @@
 
 <h3>Вы действительно хотите удалить этот документ?</h3>
 
-<div class="document_table_wrapper">
-    <table class="document-table">
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+    <table class="details-data">
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Number)
@@ -69,11 +70,11 @@
             </td>
         </tr>
     </table>
-</div>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <p>
-        <input type="submit" value="Удалить"/>
-    </p>
-}
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <p>
+            <input type="submit" value="Удалить" />
+        </p>
+    }
+</fieldset>

@@ -6,13 +6,14 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
+<div>
     @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Вернуться к списку документов", "Index")
-</p>
+</div>
 
-<div class="document_table_wrapper">
-    <table class="document-table">
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+    <table class="details-data">
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Number)
@@ -70,7 +71,8 @@
         </tr>
         @if (Model.Moderator != null) {
             <tr>
-                <td>Кому отправлено на проверку
+                <td>
+                    @Html.DisplayNameFor(model => model.ModeratorID)
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Moderator.FIO)
@@ -78,16 +80,17 @@
             </tr>
         }
     </table>
-</div>
 
-@if (@ViewBag.IsMayCommit) {
-    <div>
-        @using (Html.BeginForm("Commit", "Client")) {
-            @Html.AntiForgeryToken()
-            <div class="hidden-fields">
-                @Html.Hidden("document_id", Model.ID)
-            </div>
-            <input type="submit" value="Зафиксировать"/>
-        }
-    </div>
-}
+    @if (@ViewBag.IsMayCommit) {
+        <div>
+            @using (Html.BeginForm("Commit", "Client")) {
+                @Html.AntiForgeryToken()
+                <div class="hidden-fields">
+                    @Html.Hidden("document_id", Model.ID)
+                </div>
+                <input type="submit" value="Зафиксировать" />
+            }
+        </div>
+    }
+
+</fieldset>

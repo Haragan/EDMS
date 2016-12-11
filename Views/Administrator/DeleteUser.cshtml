@@ -11,51 +11,53 @@
 </div>
 
 <h3>Вы действительно хотите удалить пользователя?</h3>
+
 <fieldset>
     <legend>@ViewBag.Title</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FIO)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FIO)
-    </div>
+    <table class="details-data">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FIO)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.OrganizationID)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Organization.Name)
+            </td>
+        </tr>
+    </table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PhoneNumber)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PhoneNumber)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OrganizationID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OrganizationID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ProfileID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ProfileID)
-    </div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="hidden-fields">
+            @Html.HiddenFor(model => model.ID)
+        </div>
+        <p>
+            <input type="submit" value="Удалить" />
+        </p>
+    }
 </fieldset>
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <div class="hidden-fields">
-        @Html.HiddenFor(model => model.ID)
-    </div>
-    <p>
-        <input type="submit" value="Удалить" /> |
-    </p>
-}

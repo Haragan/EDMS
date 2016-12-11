@@ -10,8 +10,9 @@
     @Html.ActionLink("Вернуться к списку документов", "Index")
 </div>
 
-<div class="document_table_wrapper">
-    <table class="document-table">
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+    <table class="details-data">
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Number)
@@ -61,21 +62,18 @@
             </td>
         </tr>
     </table>
-</div>
 
-<hr />
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    <fieldset>
-        <legend>@ViewBag.Title</legend>
 
         <div class="hidden-fields">
             @Html.Hidden("document_id", Model.ID)
             <div>
-                Выберите модератора : @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)
+                @Html.DropDownList("moderator_id", (SelectList)ViewBag.moderators)
             </div>
         </div>
         <input type="submit" value="Отправить" />
-    </fieldset>
-}
+   
+    }
+</fieldset>

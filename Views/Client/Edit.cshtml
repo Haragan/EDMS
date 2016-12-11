@@ -8,12 +8,10 @@
 
 <fieldset>
     <legend>@ViewBag.Title</legend>
+
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-
-    
-        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Number)

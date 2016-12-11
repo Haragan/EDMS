@@ -61,7 +61,7 @@ namespace EDMS.Models {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
             if (ConclusionDate < CreateDate) {
                 yield return new ValidationResult(
-                    errorMessage: "Дата заключения должна быть после даты создания",
+                    errorMessage: "Дата заключения должна быть не ранее даты создания",
                     memberNames: new[] { "ConclusionDate" });
             }
         }

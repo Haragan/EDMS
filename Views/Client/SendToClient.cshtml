@@ -11,8 +11,10 @@
     @Html.ActionLink("Вернуться к списку документов", "Index")
 </div>
 
-<div class="document_table_wrapper">
-    <table class="document-table">
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <table class="details-data">
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Number)
@@ -62,25 +64,19 @@
             </td>
         </tr>
     </table>
-</div>
 
-<hr />
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-
-    <fieldset>
-        <legend>@ViewBag.Title</legend>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
 
         <div class="hidden-fields">
             @Html.Hidden("document_id", Model.ID)
             <div>
-                Выберите клиента: @Html.DropDownList("client_id", (SelectList)ViewBag.clients)
+                @Html.DropDownList("client_id", (SelectList)ViewBag.clients)
             </div>
         </div>
 
         <p>
             <input type="submit" value="Отправить" />
         </p>
-    </fieldset>
-}
+    }
+</fieldset>

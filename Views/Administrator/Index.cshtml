@@ -4,9 +4,11 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div>
-    @Html.ActionLink("Список огранизаций", "OrganizationList")
-</div>
-<div>
-    @Html.ActionLink("Список пользователей", "UserList")
+<div class="admin-pane">
+    <div class="action">
+        @Html.ActionLink("Список огранизаций", "OrganizationList")
+    </div>
+    <div class="action">
+        @Html.ActionLink("Список пользователей", "UserList")
+    </div>
 </div>
